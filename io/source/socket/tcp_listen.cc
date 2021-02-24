@@ -4,7 +4,8 @@ namespace Shata
 {
     namespace Socket
     {
-        TcpListen::TcpListen(QObject* object) : 
+        TcpListen::TcpListen(const quint64 index, QObject* object) :
+            tcp_server_index(index),
             QObject(object),
             tcp_server(new TcpServer(this))
         {
@@ -20,7 +21,7 @@ namespace Shata
             }
         }
 
-        bool TcpListen::CreaterListen(QHostAddress address, quint16 port)
+        bool TcpListen::CreaterListen(const QHostAddress& address, quint16 port)
         {
             if (nullptr != tcp_server)
             {
@@ -34,6 +35,11 @@ namespace Shata
                 }
             }
             return false;
+        }
+
+        bool TcpListen::CreaterListen(QHostAddress* address, quint16 port)
+        {
+            return CreaterListen(std::move(std::ref(*address)), port);
         }
 
         bool TcpListen::DestroyListen()

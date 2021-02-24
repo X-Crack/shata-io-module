@@ -44,6 +44,15 @@
     <ClCompile Include="source\socket\tcp_listen.cc">
       <Filter>socket\tcp\server</Filter>
     </ClCompile>
+    <ClCompile Include="source\socket\tcp_server_service.cc">
+      <Filter>socket\tcp\server</Filter>
+    </ClCompile>
+    <ClCompile Include="source\socket\event\event_loop_thread.cc">
+      <Filter>socket\event</Filter>
+    </ClCompile>
+    <ClCompile Include="source\socket\event\event_loop_thread_pool.cc">
+      <Filter>socket\event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="source\socket\include\tcp_server.h">
@@ -52,5 +61,16 @@
     <QtMoc Include="source\socket\include\tcp_listen.h">
       <Filter>socket\tcp\server</Filter>
     </QtMoc>
+    <QtMoc Include="source\socket\include\event_loop_thread.h">
+      <Filter>socket\include</Filter>
+    </QtMoc>
+    <QtMoc Include="source\socket\include\event_loop_thread_pool.h">
+      <Filter>socket\include</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\socket\include\tcp_server_service.h">
+      <Filter>socket\tcp\server</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
