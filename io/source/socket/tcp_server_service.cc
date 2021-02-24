@@ -22,7 +22,7 @@ namespace Shata
         void TcpServerService::AddListenPort(const quint32 index, const QHostAddress& address, quint16 port)
         {
 
-            tcp_server_pool.emplace(index, std::make_unique<TcpListen>(this));
+            tcp_server_pool.emplace(index, std::make_unique<TcpListen>(index));
             // Î±´úÂë
             tcp_server_pool[index]->moveToThread(event_thread_pool->GetEventThread(index));
         }
