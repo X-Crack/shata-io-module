@@ -23,17 +23,12 @@ namespace Shata
         public:
             Q_OBJECT;
         public:
-            explicit TcpListen(const quint64 index, QObject* object = nullptr);
+            explicit TcpListen(TcpServer* server);
             virtual ~TcpListen();
-        public slots:
+        public:
             bool CreaterListen(const QHostAddress& address, quint16 port);
-            bool CreaterListen(QHostAddress* address, quint16 port);
-            bool DestroyListen();
-        signals:
-            void SendConnectionNotify(qintptr handler);
         private:
             TcpServer*                                                  tcp_server;
-            quint64                                                     tcp_server_index;
         };
     }
 }

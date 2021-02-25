@@ -181,11 +181,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="source\socket\event\event_loop_thread.cc" />
-    <ClCompile Include="source\socket\event\event_loop_thread_pool.cc" />
+    <ClCompile Include="source\socket\event\tcp_thread.cc" />
+    <ClCompile Include="source\socket\event\tcp_thread_pool.cc" />
     <ClCompile Include="source\socket\tcp_listen.cc" />
     <ClCompile Include="source\socket\tcp_server.cc" />
     <ClCompile Include="source\socket\tcp_server_service.cc" />
+    <ClCompile Include="source\socket\tcp_session.cc" />
+    <ClCompile Include="source\socket\tcp_socket.cc" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="source\socket\include\tcp_server.h" />
@@ -194,9 +196,12 @@
     <QtMoc Include="source\socket\include\tcp_listen.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="source\socket\include\event_loop_thread.h" />
-    <QtMoc Include="source\socket\include\event_loop_thread_pool.h" />
-    <ClInclude Include="source\socket\include\tcp_server_service.h" />
+    <QtMoc Include="source\socket\include\tcp_session.h" />
+    <ClInclude Include="source\socket\include\tcp_socket.h" />
+    <ClInclude Include="source\socket\include\tcp_untlity.h" />
+    <QtMoc Include="source\socket\include\tcp_thread.h" />
+    <QtMoc Include="source\socket\include\tcp_thread_pool.h" />
+    <QtMoc Include="source\socket\include\tcp_server_service.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

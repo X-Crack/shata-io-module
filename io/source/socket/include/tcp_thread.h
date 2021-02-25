@@ -7,13 +7,13 @@ namespace Shata
 {
     namespace Socket
     {
-        class EventLoopThread : public QThread
+        class TcpThread : public QThread
         {
         public:
             Q_OBJECT;
         public:
-            explicit EventLoopThread(QObject* object = nullptr);
-            virtual ~EventLoopThread();
+            explicit TcpThread(QObject* object = nullptr);
+            virtual ~TcpThread();
         public:
         private:
             virtual void run() override;

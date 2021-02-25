@@ -7,19 +7,19 @@ namespace Shata
 {
     namespace Socket
     {
-        class EventLoopThread;
-        class EventLoopThreadPool : public QObject
+        class TcpThread;
+        class TcpThreadPool : public QObject
         {
         public:
             Q_OBJECT;
         public:
-            explicit EventLoopThreadPool(QObject* object = nullptr);
-            virtual ~EventLoopThreadPool();
+            explicit TcpThreadPool(QObject* object = nullptr);
+            virtual ~TcpThreadPool();
         public:
             bool CreaterEventThreadPool(const qint32 size);
-            EventLoopThread* GetEventThread(const qint32 index);
+            TcpThread* GetEventThread(const qint32 index);
         private:
-            std::unordered_map<qint32, std::unique_ptr<EventLoopThread>>                    event_thread_pool;
+            std::unordered_map<qint32, std::unique_ptr<TcpThread>>                    event_thread_pool;
         };
     }
 }

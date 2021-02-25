@@ -12,21 +12,28 @@
  *
  */
 #include <QtNetwork/QTcpServer>
+#include <memory>
 namespace Shata
 {
     namespace Socket
     {
+        class TcpListen;
         class TcpServer : public QTcpServer
         {
         public:
-            Q_OBJECT
+            Q_OBJECT;
         public:
-            explicit TcpServer(QObject* object);
+            explicit TcpServer(QObject* object = nullptr);
             virtual ~TcpServer();
+        public slots:
+            bool CreaterServer(const QHostAddress& address, quint16 port);
+            bool DestroyServer();
         protected:
             virtual void incomingConnection(qintptr handler) override;
         signals:
             void SendConnectionNotify(qintptr handler);
+        private:
+            std::unique_ptr<TcpListen>                                      tcp_listen;
         };
     }
 }
