@@ -2,7 +2,7 @@
 #define __EVENT_EXPORT_H__
 #include <event_arch.h>
 
-#ifndef EVPP_STATIC
+#ifndef TCP_SERVICE_STATIC
 #   define TCP_SERVICE_STATIC
 #endif
 
@@ -58,18 +58,18 @@
 #endif
 
 #if defined(H_OS_WINDOWS)
-#       define EVPP_DECL_EXPORT __declspec(dllexport)
-#       define EVPP_DECL_IMPORT __declspec(dllimport)
+#       define TCP_SERVICE_DECL_EXPORT __declspec(dllexport)
+#       define TCP_SERVICE_DECL_IMPORT __declspec(dllimport)
 #else
-#       define EVPP_DECL_EXPORT
-#       define EVPP_DECL_IMPORT
+#       define TCP_SERVICE_DECL_EXPORT
+#       define TCP_SERVICE_DECL_IMPORT
 #endif
 
 #ifndef TCP_SERVICE_STATIC
 #   if defined(TCP_SERVICE_EXPORT_STATIC)
-#       define TCP_SERVICE_EXPORT EVPP_DECL_EXPORT
+#       define TCP_SERVICE_EXPORT TCP_SERVICE_DECL_EXPORT
 #   else
-#       define TCP_SERVICE_EXPORT EVPP_DECL_IMPORT
+#       define TCP_SERVICE_EXPORT TCP_SERVICE_DECL_IMPORT
 #   endif
 #else
 #       define TCP_SERVICE_EXPORT
