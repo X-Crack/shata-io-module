@@ -8,7 +8,6 @@ message("You are running qmake on a generated .pro file. This may not work!")
 
 
 HEADERS += ../source/socket/include/tcp_socket.h \
-    ../source/socket/include/tcp_untlity.h \
     ../source/socket/include/tcp_thread_pool.h \
     ../source/socket/include/tcp_thread.h \
     ../source/socket/include/tcp_session.h \
@@ -20,4 +19,5 @@ HEADERS += ../source/socket/include/tcp_socket.h \
     ../source/socket/include/event_libqt.h \
     ../source/socket/include/event_platform.h \
     ../source/socket/include/event_stdint.h \
-    ../source/socket/include/event_untlity.h
+    ../source/socket/include/event_untlity.h \
+    ../source/socket/include/event_export.h

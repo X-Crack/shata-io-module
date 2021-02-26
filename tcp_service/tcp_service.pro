@@ -4,9 +4,9 @@
 
 TEMPLATE = lib
 TARGET = tcp_service
-DESTDIR = ../Debug
+DESTDIR = ../lib/Debug/x86
 CONFIG += staticlib debug
-DEFINES += TCP_SERVICE_LIB BUILD_STATIC
+DEFINES += TCP_SERVICE_STATIC
 LIBS += -L"."
 DEPENDPATH += .
 MOC_DIR += .
