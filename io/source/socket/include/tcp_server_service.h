@@ -55,7 +55,7 @@ namespace Shata
             void OnMessage(const std::shared_ptr<TcpSession>& session, QIODevice* buffer, const u96 index);
             void OnDisplayError(const std::shared_ptr<TcpSession>& session, QAbstractSocket::SocketError error, const u96 index);
         private:
-            std::unordered_map<u96, TcpServer*>                                     tcp_server_pool;
+            std::unordered_map<u96, std::unique_ptr<TcpServer>>                     tcp_server_pool;
             std::unordered_map<u96, std::unique_ptr<TcpSocket>>                     tcp_socket_pool;
             std::unique_ptr<TcpThreadPool>                                          tcp_server_thread_pool;
             std::unique_ptr<TcpThreadPool>                                          tcp_session_thread_pool;

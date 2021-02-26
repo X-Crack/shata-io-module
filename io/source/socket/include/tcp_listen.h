@@ -12,8 +12,7 @@
  *
  */
 #include <event_config.h>
-#include <QtCore/QObject>
-#include <QtNetwork/QHostAddress>
+
 namespace Shata
 {
     namespace Socket

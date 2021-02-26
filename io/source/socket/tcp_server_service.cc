@@ -27,6 +27,8 @@ namespace Shata
             qRegisterMetaType<i32>("i32");
             qRegisterMetaType<i64>("i64");
             qRegisterMetaType<i96>("i96");
+
+            qRegisterMetaType<std::shared_ptr<TcpSession>>("std::shared_ptr<TcpSession>");
         }
 
         TcpServerService::~TcpServerService()
@@ -50,15 +52,14 @@ namespace Shata
                 return false;
             }
 
-            //  session 静态线程池                                      server 静态线程池（根据监听端口数量启动对应数量的线程）
             if (tcp_session_thread_pool->CreaterThreadPool(8) && tcp_server_thread_pool->CreaterThreadPool(tcp_socket_pool.size()))
             {
                 for (u96 i = 0; i < tcp_socket_pool.size(); ++i)
                 {
                     // 暂时不用处理 delete 后期在写销毁逻辑代码
-                    if (tcp_server_pool.emplace(i, new TcpServer()).second)
+                    if (tcp_server_pool.emplace(i, std::make_unique<TcpServer>()).second)
                     {
-                        if (connect(tcp_server_pool[i], &TcpServer::SendConnectionNotify, this, &TcpServerService::OnConnection, Qt::QueuedConnection))
+                        if (connect(tcp_server_pool[i].get(), &TcpServer::SendConnectionNotify, this, &TcpServerService::OnConnection, Qt::QueuedConnection))
                         {
                             if (tcp_server_pool[i]->CreaterServer(tcp_socket_pool[i]->GetHost(), tcp_socket_pool[i]->GetPort()))
                             {
@@ -69,7 +70,7 @@ namespace Shata
                                 }
                             }
  
-                            if (disconnect(tcp_server_pool[i], &TcpServer::SendConnectionNotify, this, &TcpServerService::OnConnection))
+                            if (disconnect(tcp_server_pool[i].get(), &TcpServer::SendConnectionNotify, this, &TcpServerService::OnConnection))
                             {
                                 continue;
                             }
@@ -83,22 +84,22 @@ namespace Shata
 
         bool TcpServerService::DestroyServer()
         {
+            for (u96 i = 0; i < tcp_socket_session.size(); ++i)
+            {
+                emit tcp_socket_session[i]->SendCloseNotify();
+            }
+
             // 理论上可以按照逻辑销毁，没有经过测试的代码。
             for (u96 i = 0; i < tcp_server_pool.size(); ++i)
             {
                 if (tcp_server_pool[i]->DestroyServer())
                 {
-                    if (disconnect(tcp_server_pool[i], &TcpServer::SendConnectionNotify, this, &TcpServerService::OnConnection))
+                    if (disconnect(tcp_server_pool[i].get(), &TcpServer::SendConnectionNotify, this, &TcpServerService::OnConnection))
                     {
                         continue;
                     }
                 }
                 return false;
-            }
-
-            for (u96 i = 0; i < tcp_socket_session.size(); ++i)
-            {
-                if(tcp_socket_session[i]->)
             }
 
             return tcp_server_thread_pool->DestroyThreadPool() && tcp_session_thread_pool->DestroyThreadPool();

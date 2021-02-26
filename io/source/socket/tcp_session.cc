@@ -8,9 +8,6 @@ namespace Shata
             tcp_index(index),
             QTcpSocket(object)
         {
-
-            qRegisterMetaType<std::shared_ptr<TcpSession>>("std::shared_ptr<TcpSession>");
-
             if (setSocketDescriptor(handler))
             {
                 connect(this, &QTcpSocket::readyRead,               this, &TcpSession::OnMessage, Qt::QueuedConnection);
@@ -21,6 +18,7 @@ namespace Shata
 #else
                 connect(this, &QAbstractSocket::errorOccurred,      this, &TcpSession::OnDisplayError, Qt::QueuedConnection);
 #endif
+                connect(this, &TcpSession::SendCloseNotify, this, &TcpSession::Close, Qt::QueuedConnection);
             }
         }
 
@@ -47,6 +45,14 @@ namespace Shata
         bool TcpSession::Send(const QByteArray& data)
         {
             return data.size() == write(data); // 发送超大数据时可能会进行分块发送，QT WRITE 内部实现机制暂不了解，如有问题在解决问题。
+        }
+
+        void TcpSession::Close()
+        {
+            if (QAbstractSocket::SocketState::ConnectedState == state())
+            {
+                return QAbstractSocket::close();
+            }
         }
 
         void TcpSession::OnDiscons()
