@@ -27,8 +27,6 @@ namespace Shata
         typedef std::function<bool(const std::shared_ptr<TcpSession>&, QIODevice*, const u96)>                              InterfaceMessage;
         typedef std::function<bool(const std::shared_ptr<TcpSession>&, const i64, const u96)>                               InterfaceSendReceipt;
         typedef std::function<bool(const std::shared_ptr<TcpSession>&, QAbstractSocket::SocketError, const u96)>            InterfaceDisplayError;
-
-        /// Message   
     }
 }
 
