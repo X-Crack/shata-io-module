@@ -18,92 +18,10 @@
       <Extensions>qrc;*</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
-    <Filter Include="socket">
-      <UniqueIdentifier>{c2bc96cb-c08e-41ee-b35c-e740cc552d8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="socket\event">
-      <UniqueIdentifier>{c8897350-faf1-4a72-be72-97edc7912e6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="socket\include">
-      <UniqueIdentifier>{1eff89e8-367a-4daf-81e3-90a05c67d00b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="socket\tcp">
-      <UniqueIdentifier>{24950b91-1a37-4e3b-a81c-316fa7a27cdc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="socket\tcp\server">
-      <UniqueIdentifier>{09c2126d-230c-42cf-b149-4c32c68fec35}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="socket\core">
-      <UniqueIdentifier>{178a31d8-1696-4cc8-8d42-3e8270117756}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\socket\tcp_server.cc">
-      <Filter>socket\tcp\server</Filter>
-    </ClCompile>
-    <ClCompile Include="source\socket\tcp_listen.cc">
-      <Filter>socket\tcp\server</Filter>
-    </ClCompile>
-    <ClCompile Include="source\socket\tcp_server_service.cc">
-      <Filter>socket\tcp\server</Filter>
-    </ClCompile>
-    <ClCompile Include="source\socket\tcp_socket.cc">
-      <Filter>socket\tcp\server</Filter>
-    </ClCompile>
-    <ClCompile Include="source\socket\tcp_session.cc">
-      <Filter>socket\tcp\server</Filter>
-    </ClCompile>
-    <ClCompile Include="source\socket\event\tcp_thread_pool.cc">
-      <Filter>socket\event</Filter>
-    </ClCompile>
-    <ClCompile Include="source\socket\event\tcp_thread.cc">
-      <Filter>socket\event</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="source\socket\include\tcp_server.h">
-      <Filter>socket\tcp\server</Filter>
-    </QtMoc>
-    <QtMoc Include="source\socket\include\tcp_listen.h">
-      <Filter>socket\tcp\server</Filter>
-    </QtMoc>
-    <QtMoc Include="source\socket\include\tcp_server_service.h">
-      <Filter>socket\tcp\server</Filter>
-    </QtMoc>
-    <QtMoc Include="source\socket\include\tcp_session.h">
-      <Filter>socket\tcp\server</Filter>
-    </QtMoc>
-    <QtMoc Include="source\socket\include\tcp_thread_pool.h">
-      <Filter>socket\include</Filter>
-    </QtMoc>
-    <QtMoc Include="source\socket\include\tcp_thread.h">
-      <Filter>socket\include</Filter>
-    </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="source\socket\include\tcp_socket.h">
-      <Filter>socket\tcp\server</Filter>
-    </ClInclude>
-    <ClInclude Include="source\socket\include\event_untlity.h">
-      <Filter>socket\core</Filter>
-    </ClInclude>
-    <ClInclude Include="source\socket\include\event_stdint.h">
-      <Filter>socket\core</Filter>
-    </ClInclude>
-    <ClInclude Include="source\socket\include\event_platform.h">
-      <Filter>socket\core</Filter>
-    </ClInclude>
-    <ClInclude Include="source\socket\include\event_config.h">
-      <Filter>socket\core</Filter>
-    </ClInclude>
-    <ClInclude Include="source\socket\include\event_arch.h">
-      <Filter>socket\core</Filter>
-    </ClInclude>
-    <ClInclude Include="source\socket\include\event_libqt.h">
-      <Filter>socket\core</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

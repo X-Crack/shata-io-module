@@ -1,6 +1,4 @@
 ﻿#include <tcp_server_service.h>
-#include <tcp_server.h>
-#include <tcp_listen.h>
 int main(int argc, char *argv[])
 {
     using namespace Shata::Socket;

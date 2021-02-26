@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files\socket">
+      <UniqueIdentifier>{b5c20950-1e0e-4218-81a3-e66a156a9fb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\socket\event">
+      <UniqueIdentifier>{d9d76da1-41c4-4c73-a7fc-dc8f437ec005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\socket\tcp">
+      <UniqueIdentifier>{a1749187-53ec-4675-97c5-2f9ff3ef1288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\socket\tcp\server">
+      <UniqueIdentifier>{d5a2d47d-380e-4440-8192-2777d1127043}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\include">
+      <UniqueIdentifier>{d2308436-95bc-4602-aa52-802bf5bc5923}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{f421f2a7-f9f4-497d-9fbc-318c5e83da35}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\socket\tcp_server.cc">
+      <Filter>Source Files\socket\tcp\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\socket\tcp_server_service.cc">
+      <Filter>Source Files\socket\tcp\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\socket\tcp_session.cc">
+      <Filter>Source Files\socket\tcp\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\socket\tcp_socket.cc">
+      <Filter>Source Files\socket\tcp\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\socket\tcp_listen.cc">
+      <Filter>Source Files\socket\tcp\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\socket\event\tcp_thread.cc">
+      <Filter>Source Files\socket\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\socket\event\tcp_thread_pool.cc">
+      <Filter>Source Files\socket\event</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="..\source\socket\include\tcp_listen.h">
+      <Filter>Header Files\include</Filter>
+    </QtMoc>
+    <QtMoc Include="..\source\socket\include\tcp_server.h">
+      <Filter>Header Files\include</Filter>
+    </QtMoc>
+    <QtMoc Include="..\source\socket\include\tcp_server_service.h">
+      <Filter>Header Files\include</Filter>
+    </QtMoc>
+    <QtMoc Include="..\source\socket\include\tcp_session.h">
+      <Filter>Header Files\include</Filter>
+    </QtMoc>
+    <QtMoc Include="..\source\socket\include\tcp_thread.h">
+      <Filter>Header Files\include</Filter>
+    </QtMoc>
+    <QtMoc Include="..\source\socket\include\tcp_thread_pool.h">
+      <Filter>Header Files\include</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\socket\include\tcp_socket.h">
+      <Filter>Header Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket\include\tcp_untlity.h">
+      <Filter>Header Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket\include\event_arch.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket\include\event_config.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket\include\event_libqt.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket\include\event_platform.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket\include\event_stdint.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket\include\event_untlity.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
