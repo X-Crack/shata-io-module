@@ -11,7 +11,7 @@ namespace Shata
 {
     namespace Socket
     {
-        TcpServerService::TcpServerService() : 
+        TcpServerService::TcpServerService() :
             tcp_server_thread_pool(std::make_unique<TcpThreadPool>()),
             tcp_session_thread_pool(std::make_unique<TcpThreadPool>()),
             tcp_index(0)
@@ -69,7 +69,7 @@ namespace Shata
                                     continue;
                                 }
                             }
- 
+
                             if (disconnect(tcp_server_pool[i].get(), &TcpServer::SendConnectionNotify, this, &TcpServerService::OnConnection))
                             {
                                 continue;
@@ -103,6 +103,38 @@ namespace Shata
             }
 
             return tcp_server_thread_pool->DestroyThreadPool() && tcp_session_thread_pool->DestroyThreadPool();
+        }
+
+        void TcpServerService::SetConnectionCallback(const InterfaceConnection& callback)
+        {
+            if (nullptr == tcp_connection_callback)
+            {
+                tcp_connection_callback = callback;
+            }
+        }
+
+        void TcpServerService::SetDisconnectCallback(const InterfaceDisconnect& callback)
+        {
+            if (nullptr == tcp_disconnect_callback)
+            {
+                tcp_disconnect_callback = callback;
+            }
+        }
+
+        void TcpServerService::SetMessageCallback(const InterfaceMessage& callback)
+        {
+            if (nullptr == tcp_message_callback)
+            {
+                tcp_message_callback = callback;
+            }
+        }
+
+        void TcpServerService::SetDisplayErrorCallback(const InterfaceDisplayError& callback)
+        {
+            if (nullptr == tcp_error_callback)
+            {
+                tcp_error_callback = callback;
+            }
         }
 
         void TcpServerService::AddSession(const u96 index, qintptr handler)

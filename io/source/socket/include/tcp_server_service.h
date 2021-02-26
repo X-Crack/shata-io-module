@@ -41,6 +41,11 @@ namespace Shata
             bool AddListenPort(const u96 index, const QHostAddress& address, quint16 port);
             bool CreaterServer();
             bool DestroyServer();
+        public:
+            void SetConnectionCallback(const InterfaceConnection& callback);
+            void SetDisconnectCallback(const InterfaceDisconnect& callback);
+            void SetMessageCallback(const InterfaceMessage& callback);
+            void SetDisplayErrorCallback(const InterfaceDisplayError& callback);
         private:
             void AddSession(const u96 index, qintptr handler);
             void DelSession(const u96 index);
