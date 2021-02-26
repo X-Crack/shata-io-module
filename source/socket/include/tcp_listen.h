@@ -18,7 +18,7 @@ namespace Shata
     namespace Socket
     {
         class TcpServer;
-        class TcpListen : public QObject
+        class TCP_SERVICE_EXPORT TcpListen : public QObject
         {
         public:
             Q_OBJECT;

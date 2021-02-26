@@ -6,7 +6,7 @@ namespace Shata
 {
     namespace Socket
     {
-        class TcpSocket
+        class TCP_SERVICE_EXPORT TcpSocket
         {
         public:
             explicit TcpSocket(const QHostAddress& address, const u16 port);

@@ -6,7 +6,7 @@ namespace Shata
     namespace Socket
     {
         class EventLoopThread;
-        class TcpSession : public QTcpSocket, public std::enable_shared_from_this<TcpSession>
+        class TCP_SERVICE_EXPORT TcpSession : public QTcpSocket, public std::enable_shared_from_this<TcpSession>
         {
         public:
             Q_OBJECT;

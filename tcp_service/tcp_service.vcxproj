@@ -30,12 +30,12 @@
   <ItemGroup>
     <ClInclude Include="..\source\socket\include\event_arch.h" />
     <ClInclude Include="..\source\socket\include\event_config.h" />
+    <ClInclude Include="..\source\socket\include\event_export.h" />
     <ClInclude Include="..\source\socket\include\event_libqt.h" />
     <ClInclude Include="..\source\socket\include\event_platform.h" />
     <ClInclude Include="..\source\socket\include\event_stdint.h" />
     <ClInclude Include="..\source\socket\include\event_untlity.h" />
     <ClInclude Include="..\source\socket\include\tcp_socket.h" />
-    <ClInclude Include="..\source\socket\include\tcp_untlity.h" />
     <QtMoc Include="..\source\socket\include\tcp_thread_pool.h" />
     <QtMoc Include="..\source\socket\include\tcp_thread.h" />
     <QtMoc Include="..\source\socket\include\tcp_session.h" />

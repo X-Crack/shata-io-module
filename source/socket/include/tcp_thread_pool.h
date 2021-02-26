@@ -8,7 +8,7 @@ namespace Shata
     namespace Socket
     {
         class TcpThread;
-        class TcpThreadPool : public QObject
+        class TCP_SERVICE_EXPORT TcpThreadPool : public QObject
         {
         public:
             Q_OBJECT;

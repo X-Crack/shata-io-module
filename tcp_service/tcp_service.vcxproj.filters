@@ -84,9 +84,6 @@
     <ClInclude Include="..\source\socket\include\tcp_socket.h">
       <Filter>Header Files\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\socket\include\tcp_untlity.h">
-      <Filter>Header Files\include</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\socket\include\event_arch.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
@@ -103,6 +100,9 @@
       <Filter>Header Files\core</Filter>
     </ClInclude>
     <ClInclude Include="..\source\socket\include\event_untlity.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket\include\event_export.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
   </ItemGroup>

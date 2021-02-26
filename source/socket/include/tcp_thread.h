@@ -5,7 +5,7 @@ namespace Shata
 {
     namespace Socket
     {
-        class TcpThread : public QThread
+        class TCP_SERVICE_EXPORT TcpThread : public QThread
         {
         public:
             Q_OBJECT;

@@ -27,7 +27,7 @@ namespace Shata
         class TcpServer;
         class TcpSocket;
         class TcpSession;
-        class TcpServerService : public QObject
+        class TCP_SERVICE_EXPORT TcpServerService : public QObject
         {
         public:
             Q_OBJECT;
