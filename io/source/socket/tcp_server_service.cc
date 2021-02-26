@@ -117,9 +117,11 @@ namespace Shata
         {
             if (nullptr != session)
             {
-                if (connect(session, &TcpSession::SendDisconsNotify, this, &TcpServerService::OnDisconnect, Qt::QueuedConnection)
-                    && connect(session, &TcpSession::SendMessageNotify, this, &TcpServerService::OnMessage, Qt::DirectConnection)
-                    && connect(session, &TcpSession::SendDisplayErrorNotify, this, &TcpServerService::OnDisplayError, Qt::DirectConnection)
+                if 
+                    (
+                       connect(session, &TcpSession::SendDisconsNotify,         this, &TcpServerService::OnDisconnect, Qt::QueuedConnection)
+                    && connect(session, &TcpSession::SendMessageNotify,         this, &TcpServerService::OnMessage, Qt::DirectConnection)
+                    && connect(session, &TcpSession::SendDisplayErrorNotify,    this, &TcpServerService::OnDisplayError, Qt::DirectConnection)
                     )
                 {
                     // 将会话任务送到线程中运行
@@ -133,9 +135,9 @@ namespace Shata
             if (nullptr != session)
             {
                 return
-                   disconnect(session, &TcpSession::SendDisconsNotify, this, &TcpServerService::OnDisconnect)
-                && disconnect(session, &TcpSession::SendMessageNotify, this, &TcpServerService::OnMessage)
-                && disconnect(session, &TcpSession::SendDisplayErrorNotify, this, &TcpServerService::OnDisplayError);
+                   disconnect(session, &TcpSession::SendDisconsNotify,          this, &TcpServerService::OnDisconnect)
+                && disconnect(session, &TcpSession::SendMessageNotify,          this, &TcpServerService::OnMessage)
+                && disconnect(session, &TcpSession::SendDisplayErrorNotify,     this, &TcpServerService::OnDisplayError);
             }
             return false;
         }
