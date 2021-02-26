@@ -40,8 +40,7 @@ namespace Shata
         public:
             bool AddListenPort(const u96 index, const QHostAddress& address, quint16 port);
             bool CreaterServer();
-        public:
-
+            bool DestroyServer();
         private:
             void AddSession(const u96 index, qintptr handler);
             void DelSession(const u96 index);

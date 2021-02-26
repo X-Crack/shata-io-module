@@ -28,7 +28,7 @@ namespace Shata
 
         bool TcpServer::DestroyServer()
         {
-            return false;
+            return tcp_listen->DestroyListen();
         }
 
         void TcpServer::incomingConnection(qintptr handler)

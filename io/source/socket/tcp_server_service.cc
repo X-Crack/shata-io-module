@@ -51,7 +51,7 @@ namespace Shata
             }
 
             //  session 静态线程池                                      server 静态线程池（根据监听端口数量启动对应数量的线程）
-            if (tcp_session_thread_pool->CreaterEventThreadPool(8) && tcp_server_thread_pool->CreaterEventThreadPool(tcp_socket_pool.size()))
+            if (tcp_session_thread_pool->CreaterThreadPool(8) && tcp_server_thread_pool->CreaterThreadPool(tcp_socket_pool.size()))
             {
                 for (u96 i = 0; i < tcp_socket_pool.size(); ++i)
                 {
@@ -79,6 +79,29 @@ namespace Shata
                 return true;
             }
             return false;
+        }
+
+        bool TcpServerService::DestroyServer()
+        {
+            // 理论上可以按照逻辑销毁，没有经过测试的代码。
+            for (u96 i = 0; i < tcp_server_pool.size(); ++i)
+            {
+                if (tcp_server_pool[i]->DestroyServer())
+                {
+                    if (disconnect(tcp_server_pool[i], &TcpServer::SendConnectionNotify, this, &TcpServerService::OnConnection))
+                    {
+                        continue;
+                    }
+                }
+                return false;
+            }
+
+            for (u96 i = 0; i < tcp_socket_session.size(); ++i)
+            {
+                if(tcp_socket_session[i]->)
+            }
+
+            return tcp_server_thread_pool->DestroyThreadPool() && tcp_session_thread_pool->DestroyThreadPool();
         }
 
         void TcpServerService::AddSession(const u96 index, qintptr handler)

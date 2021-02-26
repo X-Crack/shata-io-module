@@ -28,6 +28,7 @@ namespace Shata
             virtual ~TcpListen();
         public:
             bool CreaterListen(const QHostAddress& address, u16 port);
+            bool DestroyListen();
         private:
             TcpServer*                                                  tcp_server;
         };

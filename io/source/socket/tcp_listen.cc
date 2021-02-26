@@ -20,5 +20,18 @@ namespace Shata
         {
             return tcp_server->listen(address, port);
         }
+
+        bool TcpListen::DestroyListen()
+        {
+            if (nullptr != tcp_server)
+            {
+                if (tcp_server->isListening())
+                {
+                    tcp_server->close();
+                }
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -17,10 +17,11 @@ namespace Shata
             explicit TcpThreadPool(QObject* object = nullptr);
             virtual ~TcpThreadPool();
         public:
-            bool CreaterEventThreadPool(const qint32 size);
-            TcpThread* GetEventThread(const qint32 index);
+            bool CreaterThreadPool(const u96 size);
+            bool DestroyThreadPool();
+            TcpThread* GetEventThread(const u96 index);
         private:
-            std::unordered_map<qint32, std::unique_ptr<TcpThread>>                    event_thread_pool;
+            std::unordered_map<u96, std::unique_ptr<TcpThread>>                    event_thread_pool;
         };
     }
 }
