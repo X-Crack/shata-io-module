@@ -46,13 +46,15 @@ namespace Shata
             void AddSession(const u96 index, qintptr handler);
             void DelSession(const u96 index);
             const std::shared_ptr<TcpSession>& GetSession(const u96 index);
-            void InitializeSession(TcpSession* session, TcpThread* thread, const u96 index);
+            void CreaterSession(TcpSession* session, TcpThread* thread, const u96 index);
+            bool DestroySession(TcpSession* session);
         private:
             const quint32 GetPlexingIndex(u96 index = 0);
         private slots:
             void OnConnection(qintptr handler);
             void OnDisconnect(const std::shared_ptr<TcpSession>& session, const u96 index);
             void OnMessage(const std::shared_ptr<TcpSession>& session, QIODevice* buffer, const u96 index);
+            void OnDisplayError(const std::shared_ptr<TcpSession>& session, QAbstractSocket::SocketError error, const u96 index);
         private:
             std::unordered_map<u96, TcpServer*>                                     tcp_server_pool;
             std::unordered_map<u96, std::unique_ptr<TcpSocket>>                     tcp_socket_pool;
@@ -64,6 +66,7 @@ namespace Shata
             InterfaceConnection                                                     tcp_connection_callback;
             InterfaceDisconnect                                                     tcp_disconnect_callback;
             InterfaceMessage                                                        tcp_message_callback;
+            InterfaceDisplayError                                                   tcp_error_callback;
         };
     }
 }

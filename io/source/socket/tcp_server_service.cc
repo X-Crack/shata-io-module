@@ -94,7 +94,7 @@ namespace Shata
                         tcp_connection_callback(GetSession(index), index);
                     }
 
-                    return InitializeSession(GetSession(index).get(), tcp_session_thread_pool->GetEventThread(index), index);
+                    return CreaterSession(GetSession(index).get(), tcp_session_thread_pool->GetEventThread(index), index);
                 }
             }
         }
@@ -113,18 +113,31 @@ namespace Shata
             return std::cref(tcp_socket_session[index]);
         }
 
-        void TcpServerService::InitializeSession(TcpSession* session, TcpThread* thread, const u96 index)
+        void TcpServerService::CreaterSession(TcpSession* session, TcpThread* thread, const u96 index)
         {
             if (nullptr != session)
             {
                 if (connect(session, &TcpSession::SendDisconsNotify, this, &TcpServerService::OnDisconnect, Qt::QueuedConnection)
                     && connect(session, &TcpSession::SendMessageNotify, this, &TcpServerService::OnMessage, Qt::DirectConnection)
+                    && connect(session, &TcpSession::SendDisplayErrorNotify, this, &TcpServerService::OnDisplayError, Qt::DirectConnection)
                     )
                 {
                     // 将会话任务送到线程中运行
                     return session->moveToThread(thread);
                 }
             }
+        }
+
+        bool TcpServerService::DestroySession(TcpSession* session)
+        {
+            if (nullptr != session)
+            {
+                return
+                   disconnect(session, &TcpSession::SendDisconsNotify, this, &TcpServerService::OnDisconnect)
+                && disconnect(session, &TcpSession::SendMessageNotify, this, &TcpServerService::OnMessage)
+                && disconnect(session, &TcpSession::SendDisplayErrorNotify, this, &TcpServerService::OnDisplayError);
+            }
+            return false;
         }
 
         const u96 TcpServerService::GetPlexingIndex(u96 index)
@@ -154,7 +167,10 @@ namespace Shata
                 tcp_disconnect_callback(session, index);
             }
 
-            return DelSession(index);
+            if (DestroySession(session.get()))
+            {
+                return DelSession(index);
+            }
         }
 
         void TcpServerService::OnMessage(const std::shared_ptr<TcpSession>& session, QIODevice* buffer, const u96 index)
@@ -162,6 +178,14 @@ namespace Shata
             if (nullptr != tcp_message_callback)
             {
                 tcp_message_callback(session, buffer, index);
+            }
+        }
+
+        void TcpServerService::OnDisplayError(const std::shared_ptr<TcpSession>& session, QAbstractSocket::SocketError error, const u96 index)
+        {
+            if (nullptr != tcp_error_callback)
+            {
+                tcp_error_callback(session, error, index);
             }
         }
     }

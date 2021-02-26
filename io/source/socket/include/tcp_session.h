@@ -25,6 +25,7 @@ namespace Shata
             // 客户断开通知信号
             void SendDisconsNotify(const std::shared_ptr<TcpSession>& session, const u96 index);
             void SendMessageNotify(const std::shared_ptr<TcpSession>& session, QIODevice* buffer, const u96 index);
+            void SendDisplayErrorNotify(const std::shared_ptr<TcpSession>& session, QAbstractSocket::SocketError error, const u96 index);
         private slots:
             // 客户断开
             void OnDiscons();
@@ -33,7 +34,7 @@ namespace Shata
             // 发送回执
             void OnSendmsg(i64 bytes);
             // 错误回执
-            void OnDisplayError(QAbstractSocket::SocketError ex);
+            void OnDisplayError(QAbstractSocket::SocketError error);
         private:
             void Cleanup();
         private:

@@ -73,9 +73,9 @@ namespace Shata
 
         }
 
-        void TcpSession::OnDisplayError(QAbstractSocket::SocketError ex)
+        void TcpSession::OnDisplayError(QAbstractSocket::SocketError error)
         {
-
+            emit SendDisplayErrorNotify(shared_from_this(), error, tcp_index);
         }
 
         void TcpSession::Cleanup()
