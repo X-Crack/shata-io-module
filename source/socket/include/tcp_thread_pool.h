@@ -1,5 +1,16 @@
-﻿#ifndef __EVENT_LOOP_THREAD_POOL_H__
-#define __EVENT_LOOP_THREAD_POOL_H__
+﻿#ifndef __TCP_THREAD_POOL_H__
+#define __TCP_THREAD_POOL_H__
+/*!
+ *
+ * file: tcp_thread_pool.h
+ *
+ * author: JoYous(master@crack.ee)
+ *
+ * reviser: 
+ *
+ * date: 2021/02/26
+ *
+ */
 #include <event_config.h>
 #include <unordered_map>
 #include <memory>
@@ -24,4 +35,4 @@ namespace Shata
         };
     }
 }
-#endif // __EVENT_LOOP_THREAD_POOL_H__
+#endif // __TCP_THREAD_POOL_H__

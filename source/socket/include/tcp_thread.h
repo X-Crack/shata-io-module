@@ -1,5 +1,16 @@
-﻿#ifndef __EVENT_LOOP_THREAD_H__
-#define __EVENT_LOOP_THREAD_H__
+﻿#ifndef __TCP_THREAD_H__
+#define __TCP_THREAD_H__
+/*!
+ *
+ * file: tcp_thread.h
+ *
+ * author: JoYous(master@crack.ee)
+ *
+ * reviser: 
+ *
+ * date: 2021/02/26
+ *
+ */
 #include <event_config.h>
 namespace Shata
 {
@@ -18,4 +29,4 @@ namespace Shata
         };
     }
 }
-#endif // __EVENT_LOOP_THREAD_H__
+#endif // __TCP_THREAD_H__

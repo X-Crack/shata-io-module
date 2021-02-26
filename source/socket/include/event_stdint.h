@@ -1,5 +1,16 @@
 ﻿#ifndef __EVENT_STDINT_H__
 #define __EVENT_STDINT_H__
+/*!
+ *
+ * file: event_stdint.h
+ *
+ * author: JoYous(master@crack.ee)
+ *
+ * reviser: 
+ *
+ * date: 2021/02/26
+ *
+ */
 #include <stdint.h>
 #include <iostream>
 #include <string>

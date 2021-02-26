@@ -1,7 +1,17 @@
 #ifndef __EVENT_EXPORT_H__
 #define __EVENT_EXPORT_H__
 #include <event_arch.h>
-
+/*!
+ *
+ * file: event_export.h
+ *
+ * author: JoYous(master@crack.ee)
+ *
+ * reviser: 
+ *
+ * date: 2021/02/26
+ *
+ */
 #ifndef TCP_SERVICE_STATIC
 #   define TCP_SERVICE_STATIC
 #endif

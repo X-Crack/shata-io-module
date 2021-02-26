@@ -1,7 +1,17 @@
 ﻿#ifndef __TCP_SOCKET_H__
 #define __TCP_SOCKET_H__
+/*!
+ *
+ * file: tcp_socket.h
+ *
+ * author: JoYous(master@crack.ee)
+ *
+ * reviser: 
+ *
+ * date: 2021/02/26
+ *
+ */
 #include <event_config.h>
-#include <QtNetwork/QHostAddress>
 namespace Shata
 {
     namespace Socket

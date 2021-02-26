@@ -2,6 +2,17 @@
 #define __EVENT_ARCH_H__
 #include <ctype.h>
 #include <cassert>
+/*!
+ *
+ * file: event_arch.h
+ *
+ * author: JoYous(master@crack.ee)
+ *
+ * reviser: 
+ *
+ * date: 2021/02/26
+ *
+ */
 #ifdef __CYGWIN__
 #   define H_OS_CYGWIN                                                                          1
 #   elif defined(__MINGW__) || defined(__MINGW32__) || defined(__MINGW64__)

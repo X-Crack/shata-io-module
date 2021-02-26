@@ -1,5 +1,16 @@
 ﻿#ifndef __EVENT_PLATFORM_H__
 #define __EVENT_PLATFORM_H__
+/*!
+ *
+ * file: event_platform.h
+ *
+ * author: JoYous(master@crack.ee)
+ *
+ * reviser: 
+ *
+ * date: 2021/02/26
+ *
+ */
 #include <event_arch.h>
 #include <event_stdint.h>
 

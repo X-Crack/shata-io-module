@@ -1,5 +1,16 @@
 ﻿#ifndef __TCP_SESSION_H__
 #define __TCP_SESSION_H__
+/*!
+ *
+ * file: tcp_session.h
+ *
+ * author: JoYous(master@crack.ee)
+ *
+ * reviser: 
+ *
+ * date: 2021/02/26
+ *
+ */
 #include <event_config.h>
 namespace Shata
 {
