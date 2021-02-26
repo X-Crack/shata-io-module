@@ -121,7 +121,7 @@ namespace Shata
                     (
                        connect(session, &TcpSession::SendDisconsNotify,         this, &TcpServerService::OnDisconnect, Qt::QueuedConnection)
                     && connect(session, &TcpSession::SendMessageNotify,         this, &TcpServerService::OnMessage, Qt::DirectConnection)
-                    && connect(session, &TcpSession::SendDisplayErrorNotify,    this, &TcpServerService::OnDisplayError, Qt::DirectConnection)
+                    && connect(session, &TcpSession::SendDisplayErrorNotify,    this, &TcpServerService::OnDisplayError, Qt::QueuedConnection)
                     )
                 {
                     // 将会话任务送到线程中运行
