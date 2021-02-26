@@ -12,7 +12,6 @@
  *
  */
 #include <event_config.h>
-#include <QtNetwork/QTcpServer>
 #include <memory>
 namespace Shata
 {

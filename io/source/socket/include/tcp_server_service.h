@@ -25,7 +25,6 @@ namespace Shata
         class TcpThread;
         class TcpThreadPool;
         class TcpServer;
-        class TcpListen;
         class TcpSocket;
         class TcpSession;
         class TcpServerService : public QObject
@@ -38,7 +37,7 @@ namespace Shata
         public:
             friend TcpServer;
         public:
-            bool AddListenPort(const u96 index, const QHostAddress& address, quint16 port);
+            bool AddListenPort(const u96 index, const QHostAddress& address, u16 port);
             bool CreaterServer();
             bool DestroyServer();
         public:

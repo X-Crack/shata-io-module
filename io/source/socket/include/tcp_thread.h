@@ -1,8 +1,6 @@
 ﻿#ifndef __EVENT_LOOP_THREAD_H__
 #define __EVENT_LOOP_THREAD_H__
 #include <event_config.h>
-#include <QtCore/QThread>
-#include <QtCore/QObject>
 namespace Shata
 {
     namespace Socket

@@ -36,7 +36,7 @@ namespace Shata
 
         }
 
-        bool TcpServerService::AddListenPort(const u96 index, const QHostAddress& address, quint16 port)
+        bool TcpServerService::AddListenPort(const u96 index, const QHostAddress& address, u16 port)
         {
             if (tcp_socket_pool.find(index) == tcp_socket_pool.end())
             {
@@ -56,7 +56,6 @@ namespace Shata
             {
                 for (u96 i = 0; i < tcp_socket_pool.size(); ++i)
                 {
-                    // 暂时不用处理 delete 后期在写销毁逻辑代码
                     if (tcp_server_pool.emplace(i, std::make_unique<TcpServer>()).second)
                     {
                         if (connect(tcp_server_pool[i].get(), &TcpServer::SendConnectionNotify, this, &TcpServerService::OnConnection, Qt::QueuedConnection))

@@ -1,7 +1,6 @@
 ﻿#ifndef __EVENT_LOOP_THREAD_POOL_H__
 #define __EVENT_LOOP_THREAD_POOL_H__
 #include <event_config.h>
-#include <QtCore/QThreadPool>
 #include <unordered_map>
 #include <memory>
 namespace Shata

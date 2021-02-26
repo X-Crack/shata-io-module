@@ -30,7 +30,4 @@ namespace Shata
     }
 }
 
-
-
-
 #endif // __TCP_UNTLITY_H__

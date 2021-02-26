@@ -1,8 +1,6 @@
 ﻿#ifndef __TCP_SESSION_H__
 #define __TCP_SESSION_H__
 #include <event_config.h>
-#include <QtCore/QObject>
-#include <QtNetwork/QTcpSocket>
 namespace Shata
 {
     namespace Socket
