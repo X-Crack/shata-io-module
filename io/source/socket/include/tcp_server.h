@@ -27,7 +27,7 @@ namespace Shata
             explicit TcpServer(QObject* object = nullptr);
             virtual ~TcpServer();
         public slots:
-            bool CreaterServer(const QHostAddress& address, quint16 port);
+            bool CreaterServer(const QHostAddress& address, u16 port);
             bool DestroyServer();
         protected:
             virtual void incomingConnection(qintptr handler) override;

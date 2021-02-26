@@ -17,7 +17,7 @@ namespace Shata
 
         }
 
-        bool TcpServer::CreaterServer(const QHostAddress& address, quint16 port)
+        bool TcpServer::CreaterServer(const QHostAddress& address, u16 port)
         {
             if (tcp_listen->CreaterListen(address, port))
             {

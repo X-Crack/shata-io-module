@@ -13,7 +13,7 @@ namespace Shata
         public:
             Q_OBJECT;
         public:
-            explicit TcpSession(const quint32 index, qintptr handler, QObject* object = nullptr);
+            explicit TcpSession(const u96 index, qintptr handler, QObject* object = nullptr);
             virtual ~TcpSession();
         public slots:
             // 使用槽来定义 Send 未来可能会用到不同线程调用，方便绑定。
@@ -23,8 +23,8 @@ namespace Shata
             bool Send(const QByteArray& data);
         signals:
             // 客户断开通知信号
-            void SendDisconsNotify(const quint32 index);
-        private slots:
+            void SendDisconsNotify(const u96 index);
+        private:
             // 客户断开
             void OnDiscons();
             // 客户消息
@@ -35,7 +35,6 @@ namespace Shata
             void OnDisplayError(QAbstractSocket::SocketError ex);
         private:
             quint32                                                             tcp_index;
-            /// connect(sock_client, SIGNAL(error(QAbstractSocket::SocketError)),this, SLOT(displayError(QAbstractSocket::SocketError)),Qt::QueuedConnection);
         };
     }
 }

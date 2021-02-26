@@ -4,7 +4,7 @@ namespace Shata
 {
     namespace Socket
     {
-        TcpSocket::TcpSocket(const QHostAddress& address, const quint16 port) :
+        TcpSocket::TcpSocket(const QHostAddress& address, const u16 port) :
             tcp_address(address),
             tcp_port(port)
         {
@@ -16,7 +16,7 @@ namespace Shata
 
         }
 
-        void TcpSocket::AddListenPort(const QHostAddress& address, quint16 port)
+        void TcpSocket::AddListenPort(const QHostAddress& address, u16 port)
         {
             tcp_address = address;
             tcp_port = port;
@@ -27,7 +27,7 @@ namespace Shata
             return std::cref(tcp_address);
         }
 
-        const quint16 TcpSocket::GetPort()
+        const u16 TcpSocket::GetPort()
         {
             return tcp_port;
         }

@@ -9,15 +9,15 @@ namespace Shata
         class TcpSocket
         {
         public:
-            explicit TcpSocket(const QHostAddress& address, const quint16 port);
+            explicit TcpSocket(const QHostAddress& address, const u16 port);
             virtual ~TcpSocket();
         public:
-            void AddListenPort(const QHostAddress& address, quint16 port);
+            void AddListenPort(const QHostAddress& address, u16 port);
             const QHostAddress& GetHost();
-            const quint16 GetPort();
+            const u16 GetPort();
         private:
             QHostAddress                                        tcp_address;
-            quint16                                             tcp_port;
+            u16                                                 tcp_port;
         };
     }
 }

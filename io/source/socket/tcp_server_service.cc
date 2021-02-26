@@ -24,7 +24,7 @@ namespace Shata
 
         }
 
-        bool TcpServerService::AddListenPort(const quint32 index, const QHostAddress& address, quint16 port)
+        bool TcpServerService::AddListenPort(const u96 index, const QHostAddress& address, quint16 port)
         {
             if (tcp_socket_pool.find(index) == tcp_socket_pool.end())
             {
@@ -43,7 +43,7 @@ namespace Shata
             //  session 静态线程池                                      server 静态线程池（根据监听端口数量启动对应数量的线程）
             if (tcp_session_thread_pool->CreaterEventThreadPool(8) && tcp_server_thread_pool->CreaterEventThreadPool(tcp_socket_pool.size()))
             {
-                for (qint32 i = 0; i < tcp_socket_pool.size(); ++i)
+                for (u96 i = 0; i < tcp_socket_pool.size(); ++i)
                 {
                     // 暂时不用处理 delete 后期在写销毁逻辑代码
                     if (tcp_server_pool.emplace(i, new TcpServer()).second)
@@ -71,7 +71,7 @@ namespace Shata
             return false;
         }
 
-        void TcpServerService::AddSession(const quint32 index, qintptr handler)
+        void TcpServerService::AddSession(const u96 index, qintptr handler)
         {
             if (tcp_socket_session.find(index) == tcp_socket_session.end())
             {
@@ -83,7 +83,7 @@ namespace Shata
             }
         }
 
-        void TcpServerService::DelSession(const quint32 index)
+        void TcpServerService::DelSession(const u96 index)
         {
             if (tcp_socket_session.find(index) != tcp_socket_session.end())
             {
@@ -92,7 +92,7 @@ namespace Shata
             }
         }
 
-        TcpSession* TcpServerService::GetSession(const quint32 index)
+        TcpSession* TcpServerService::GetSession(const u96 index)
         {
             if (tcp_socket_session.find(index) != tcp_socket_session.end())
             {
@@ -113,7 +113,7 @@ namespace Shata
             }
         }
 
-        const quint32 TcpServerService::GetPlexingIndex(quint32 index)
+        const u96 TcpServerService::GetPlexingIndex(u96 index)
         {
             if (index == 0)
             {
@@ -133,7 +133,7 @@ namespace Shata
             AddSession(GetPlexingIndex(), handler);
         }
 
-        void TcpServerService::OnDisconnect(const quint32 index)
+        void TcpServerService::OnDisconnect(const u96 index)
         {
             DelSession(index);
         }

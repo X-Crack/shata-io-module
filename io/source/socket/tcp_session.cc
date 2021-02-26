@@ -4,7 +4,7 @@ namespace Shata
 {
     namespace Socket
     {
-        TcpSession::TcpSession(const quint32 index, qintptr handler, QObject* object) :
+        TcpSession::TcpSession(const u96 index, qintptr handler, QObject* object) :
             tcp_index(index),
             QTcpSocket(object)
         {
@@ -28,7 +28,7 @@ namespace Shata
 
         bool TcpSession::Send(const char* data, qint64 len)
         {
-            return len == write(data, len);
+            return len == write(data, len); 
         }
 
         bool TcpSession::Send(const char* data)
@@ -53,8 +53,10 @@ namespace Shata
 
         void TcpSession::OnMessage()
         {
-            TcpSession* this_socket = qobject_cast<TcpSession*>(sender());
-            Send(this_socket->read(this_socket->size()));
+            if (this == qobject_cast<TcpSession*>(sender()))
+            {
+                Send(QIODevice::read(QIODevice::size()));
+            }
         }
 
         void TcpSession::OnSendmsg(qint64 bytes)
