@@ -8,7 +8,7 @@ namespace Shata
     namespace Socket
     {
         class EventLoopThread;
-        class TcpSession : public QTcpSocket
+        class TcpSession : public QTcpSocket, public std::enable_shared_from_this<TcpSession>
         {
         public:
             Q_OBJECT;
@@ -23,18 +23,21 @@ namespace Shata
             bool Send(const QByteArray& data);
         signals:
             // 客户断开通知信号
-            void SendDisconsNotify(const u96 index);
-        private:
+            void SendDisconsNotify(const std::shared_ptr<TcpSession>& session, const u96 index);
+            void SendMessageNotify(const std::shared_ptr<TcpSession>& session, QIODevice* buffer, const u96 index);
+        private slots:
             // 客户断开
             void OnDiscons();
             // 客户消息
             void OnMessage();
             // 发送回执
-            void OnSendmsg(qint64 bytes);
+            void OnSendmsg(i64 bytes);
             // 错误回执
             void OnDisplayError(QAbstractSocket::SocketError ex);
         private:
-            quint32                                                             tcp_index;
+            void Cleanup();
+        private:
+            u96                                                             tcp_index;
         };
     }
 }

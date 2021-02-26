@@ -16,7 +16,17 @@ namespace Shata
             tcp_session_thread_pool(std::make_unique<TcpThreadPool>()),
             tcp_index(0)
         {
-            
+            qRegisterMetaType<u8>("u8");
+            qRegisterMetaType<u16>("u16");
+            qRegisterMetaType<u32>("u32");
+            qRegisterMetaType<u64>("u64");
+            qRegisterMetaType<u96>("u96");
+
+            qRegisterMetaType<i8>("i8");
+            qRegisterMetaType<i16>("i16");
+            qRegisterMetaType<i32>("i32");
+            qRegisterMetaType<i64>("i64");
+            qRegisterMetaType<i96>("i96");
         }
 
         TcpServerService::~TcpServerService()
@@ -75,10 +85,16 @@ namespace Shata
         {
             if (tcp_socket_session.find(index) == tcp_socket_session.end())
             {
-                if (tcp_socket_session.emplace(index, std::make_unique<TcpSession>(index, handler)).second)
+                if (tcp_socket_session.emplace(index, std::make_shared<TcpSession>(index, handler)).second)
                 {
                     // 将会话投递到线程中运行，某一个线程暂时阻塞不影响其它线程消息执行顺序（投递是均衡分配的）。
-                    InitializeSession(GetSession(index), tcp_session_thread_pool->GetEventThread(index));
+
+                    if (nullptr != tcp_connection_callback)
+                    {
+                        tcp_connection_callback(GetSession(index), index);
+                    }
+
+                    return InitializeSession(GetSession(index).get(), tcp_session_thread_pool->GetEventThread(index), index);
                 }
             }
         }
@@ -92,23 +108,21 @@ namespace Shata
             }
         }
 
-        TcpSession* TcpServerService::GetSession(const u96 index)
+        const std::shared_ptr<TcpSession>& TcpServerService::GetSession(const u96 index)
         {
-            if (tcp_socket_session.find(index) != tcp_socket_session.end())
-            {
-                return tcp_socket_session[index].get();
-            }
-            return nullptr;
+            return std::cref(tcp_socket_session[index]);
         }
 
-        void TcpServerService::InitializeSession(TcpSession* session, TcpThread* thread)
+        void TcpServerService::InitializeSession(TcpSession* session, TcpThread* thread, const u96 index)
         {
             if (nullptr != session)
             {
-                if (connect(session, &TcpSession::SendDisconsNotify, this, &TcpServerService::OnDisconnect, Qt::QueuedConnection))
+                if (connect(session, &TcpSession::SendDisconsNotify, this, &TcpServerService::OnDisconnect, Qt::QueuedConnection)
+                    && connect(session, &TcpSession::SendMessageNotify, this, &TcpServerService::OnMessage, Qt::DirectConnection)
+                    )
                 {
                     // 将会话任务送到线程中运行
-                    session->moveToThread(thread);
+                    return session->moveToThread(thread);
                 }
             }
         }
@@ -130,12 +144,25 @@ namespace Shata
         void TcpServerService::OnConnection(qintptr handler)
         {
             // 不用锁，因为信号投递到主线程，会排队依次执行。这个函数是一个槽。
-            AddSession(GetPlexingIndex(), handler);
+            return AddSession(GetPlexingIndex(), handler);
         }
 
-        void TcpServerService::OnDisconnect(const u96 index)
+        void TcpServerService::OnDisconnect(const std::shared_ptr<TcpSession>& session, const u96 index)
         {
-            DelSession(index);
+            if (nullptr != tcp_disconnect_callback)
+            {
+                tcp_disconnect_callback(session, index);
+            }
+
+            return DelSession(index);
+        }
+
+        void TcpServerService::OnMessage(const std::shared_ptr<TcpSession>& session, QIODevice* buffer, const u96 index)
+        {
+            if (nullptr != tcp_message_callback)
+            {
+                tcp_message_callback(session, buffer, index);
+            }
         }
     }
 }

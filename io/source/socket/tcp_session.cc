@@ -8,11 +8,14 @@ namespace Shata
             tcp_index(index),
             QTcpSocket(object)
         {
+
+            qRegisterMetaType<std::shared_ptr<TcpSession>>("std::shared_ptr<TcpSession>");
+
             if (setSocketDescriptor(handler))
             {
                 connect(this, &QTcpSocket::readyRead,               this, &TcpSession::OnMessage, Qt::QueuedConnection);
                 connect(this, &QTcpSocket::disconnected,            this, &TcpSession::OnDiscons, Qt::QueuedConnection);
-                connect(this, &QTcpSocket::bytesWritten,            this, &TcpSession::OnSendmsg, Qt::QueuedConnection);
+                //connect(this, &QTcpSocket::bytesWritten,            this, &TcpSession::OnSendmsg, Qt::QueuedConnection);
 #if QT_DEPRECATED_SINCE(5, 0)
                 connect(this, static_cast<void(QAbstractSocket::*)(SocketError)>(&QAbstractSocket::error), this, &TcpSession::OnDisplayError, Qt::QueuedConnection);
 #else
@@ -23,9 +26,9 @@ namespace Shata
 
         TcpSession::~TcpSession()
         {
-
+            Cleanup();
         }
-
+        
         bool TcpSession::Send(const char* data, qint64 len)
         {
             return len == write(data, len); 
@@ -48,18 +51,24 @@ namespace Shata
 
         void TcpSession::OnDiscons()
         {
-            emit SendDisconsNotify(tcp_index);
+            emit SendDisconsNotify(shared_from_this(), tcp_index);
         }
 
         void TcpSession::OnMessage()
         {
             if (this == qobject_cast<TcpSession*>(sender()))
             {
-                Send(QIODevice::read(QIODevice::size()));
+                //Send(QIODevice::read(QIODevice::size()));
+                emit SendMessageNotify(shared_from_this(), this, tcp_index);
+            }
+            else
+            {
+                // 不会出现这种错误，除非有人篡改程序。
+                emit SendMessageNotify(shared_from_this(), qobject_cast<TcpSession*>(sender()), tcp_index);
             }
         }
 
-        void TcpSession::OnSendmsg(qint64 bytes)
+        void TcpSession::OnSendmsg(i64 bytes)
         {
 
         }
@@ -67,6 +76,20 @@ namespace Shata
         void TcpSession::OnDisplayError(QAbstractSocket::SocketError ex)
         {
 
+        }
+
+        void TcpSession::Cleanup()
+        {
+            setSocketState(SocketState::ClosingState);
+
+            disconnect(this, &QTcpSocket::readyRead,                this, &TcpSession::OnMessage);
+            disconnect(this, &QTcpSocket::disconnected,             this, &TcpSession::OnDiscons);
+            //connect(this, &QTcpSocket::bytesWritten,              this, &TcpSession::OnSendmsg);
+#if QT_DEPRECATED_SINCE(5, 0)
+            disconnect(this, static_cast<void(QAbstractSocket::*)(SocketError)>(&QAbstractSocket::error), this, &TcpSession::OnDisplayError);
+#else
+            disconnect(this, &QAbstractSocket::errorOccurred,       this, &TcpSession::OnDisplayError);
+#endif
         }
     }
 }

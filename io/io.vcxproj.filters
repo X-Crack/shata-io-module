@@ -33,6 +33,9 @@
     <Filter Include="socket\tcp\server">
       <UniqueIdentifier>{09c2126d-230c-42cf-b149-4c32c68fec35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="socket\core">
+      <UniqueIdentifier>{178a31d8-1696-4cc8-8d42-3e8270117756}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,23 +84,26 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\socket\include\tcp_untlity.h">
-      <Filter>socket\include</Filter>
-    </ClInclude>
     <ClInclude Include="source\socket\include\tcp_socket.h">
       <Filter>socket\tcp\server</Filter>
     </ClInclude>
+    <ClInclude Include="source\socket\include\event_untlity.h">
+      <Filter>socket\core</Filter>
+    </ClInclude>
     <ClInclude Include="source\socket\include\event_stdint.h">
-      <Filter>socket\event</Filter>
-    </ClInclude>
-    <ClInclude Include="source\socket\include\event_config.h">
-      <Filter>socket\event</Filter>
-    </ClInclude>
-    <ClInclude Include="source\socket\include\event_arch.h">
-      <Filter>socket\event</Filter>
+      <Filter>socket\core</Filter>
     </ClInclude>
     <ClInclude Include="source\socket\include\event_platform.h">
-      <Filter>socket\event</Filter>
+      <Filter>socket\core</Filter>
+    </ClInclude>
+    <ClInclude Include="source\socket\include\event_config.h">
+      <Filter>socket\core</Filter>
+    </ClInclude>
+    <ClInclude Include="source\socket\include\event_arch.h">
+      <Filter>socket\core</Filter>
+    </ClInclude>
+    <ClInclude Include="source\socket\include\event_libqt.h">
+      <Filter>socket\core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
