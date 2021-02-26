@@ -1,5 +1,6 @@
-#ifndef __TCP_SOCKET_H__
+﻿#ifndef __TCP_SOCKET_H__
 #define __TCP_SOCKET_H__
+#include <event_config.h>
 #include <QtNetwork/QHostAddress>
 namespace Shata
 {

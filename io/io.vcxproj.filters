@@ -87,5 +87,17 @@
     <ClInclude Include="source\socket\include\tcp_socket.h">
       <Filter>socket\tcp\server</Filter>
     </ClInclude>
+    <ClInclude Include="source\socket\include\event_stdint.h">
+      <Filter>socket\event</Filter>
+    </ClInclude>
+    <ClInclude Include="source\socket\include\event_config.h">
+      <Filter>socket\event</Filter>
+    </ClInclude>
+    <ClInclude Include="source\socket\include\event_arch.h">
+      <Filter>socket\event</Filter>
+    </ClInclude>
+    <ClInclude Include="source\socket\include\event_platform.h">
+      <Filter>socket\event</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

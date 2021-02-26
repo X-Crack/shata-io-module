@@ -1,4 +1,4 @@
-#ifndef __TCP_SERVER_H__
+﻿#ifndef __TCP_SERVER_H__
 #define __TCP_SERVER_H__
 /*!
  *
@@ -11,6 +11,7 @@
  * date: 2021/02/24
  *
  */
+#include <event_config.h>
 #include <QtNetwork/QTcpServer>
 #include <memory>
 namespace Shata

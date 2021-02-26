@@ -1,6 +1,6 @@
-#ifndef __TCP_UNTLITY_H__
+﻿#ifndef __TCP_UNTLITY_H__
 #define __TCP_UNTLITY_H__
-
+#include <event_config.h>
 /*!
  *
  * file: tcp_untlity.h
@@ -18,11 +18,7 @@ namespace Shata
 {
     namespace Socket
     {
-        struct SocketInfo final
-        {
-            QHostAddress        address;
-            quint16             port;
-        };
+
     }
 }
 

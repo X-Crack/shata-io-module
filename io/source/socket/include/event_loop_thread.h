@@ -1,19 +1,19 @@
-﻿#ifndef __EVENT_LOOP_THREAD_H__
+#ifndef __EVENT_LOOP_THREAD_H__
 #define __EVENT_LOOP_THREAD_H__
-#include <event_config.h>
+
 #include <QtCore/QThread>
 #include <QtCore/QObject>
 namespace Shata
 {
     namespace Socket
     {
-        class TcpThread : public QThread
+        class EventLoopThread : public QThread
         {
         public:
             Q_OBJECT;
         public:
-            explicit TcpThread(QObject* object = nullptr);
-            virtual ~TcpThread();
+            explicit EventLoopThread(QObject* object = nullptr);
+            virtual ~EventLoopThread();
         public:
         private:
             virtual void run() override;

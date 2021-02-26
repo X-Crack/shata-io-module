@@ -1,4 +1,4 @@
-#include <tcp_session.h>
+﻿#include <tcp_session.h>
 #include <windows.h>
 namespace Shata
 {
@@ -28,20 +28,22 @@ namespace Shata
 
         bool TcpSession::Send(const char* data, qint64 len)
         {
-            write(data, len);
-            return true;
+            return len == write(data, len);
         }
 
         bool TcpSession::Send(const char* data)
         {
-            write(data);
-            return true;
+            return strlen(data) == write(data);
+        }
+
+        bool TcpSession::Send(const std::string& data)
+        {
+            return data.size() == write(data.c_str(), data.size());
         }
 
         bool TcpSession::Send(const QByteArray& data)
         {
-            write(data);
-            return true;
+            return data.size() == write(data); // 发送超大数据时可能会进行分块发送，QT WRITE 内部实现机制暂不了解，如有问题在解决问题。
         }
 
         void TcpSession::OnDiscons()
@@ -52,13 +54,12 @@ namespace Shata
         void TcpSession::OnMessage()
         {
             TcpSession* this_socket = qobject_cast<TcpSession*>(sender());
-            printf("�û���%d ���ݳ��ȣ�%lld\n", this_socket->tcp_index, this_socket->size());
-            this_socket->read(this_socket->size());
+            Send(this_socket->read(this_socket->size()));
         }
 
         void TcpSession::OnSendmsg(qint64 bytes)
         {
-            
+
         }
 
         void TcpSession::OnDisplayError(QAbstractSocket::SocketError ex)

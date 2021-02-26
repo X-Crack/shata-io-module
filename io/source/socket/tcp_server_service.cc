@@ -1,4 +1,4 @@
-#include <tcp_server_service.h>
+ï»¿#include <tcp_server_service.h>
 #include <tcp_listen.h>
 #include <tcp_server.h>
 #include <tcp_socket.h>
@@ -30,7 +30,7 @@ namespace Shata
             {
                 return tcp_socket_pool.emplace(index, std::make_unique<TcpSocket>(address, port)).second;
             }
-            return false; // ÒÑ¾­´æÔÚ
+            return false; // å·²ç»å­˜åœ¨
         }
 
         bool TcpServerService::CreaterServer()
@@ -40,19 +40,19 @@ namespace Shata
                 return false;
             }
 
-            //  sssion ¾²Ì¬Ïß³Ì³Ø                                      server ¾²Ì¬Ïß³Ì³Ø£¨¸ù¾İ¼àÌı¶Ë¿ÚÊıÁ¿Æô¶¯¶ÔÓ¦ÊıÁ¿µÄÏß³Ì£©
+            //  session é™æ€çº¿ç¨‹æ±                                       server é™æ€çº¿ç¨‹æ± ï¼ˆæ ¹æ®ç›‘å¬ç«¯å£æ•°é‡å¯åŠ¨å¯¹åº”æ•°é‡çš„çº¿ç¨‹ï¼‰
             if (tcp_session_thread_pool->CreaterEventThreadPool(8) && tcp_server_thread_pool->CreaterEventThreadPool(tcp_socket_pool.size()))
             {
                 for (qint32 i = 0; i < tcp_socket_pool.size(); ++i)
                 {
-                    // ÔİÊ±²»ÓÃ´¦Àí delete ºóÆÚÔÚĞ´Ïú»ÙÂß¼­´úÂë
+                    // æš‚æ—¶ä¸ç”¨å¤„ç† delete åæœŸåœ¨å†™é”€æ¯é€»è¾‘ä»£ç 
                     if (tcp_server_pool.emplace(i, new TcpServer()).second)
                     {
                         if (connect(tcp_server_pool[i], &TcpServer::SendConnectionNotify, this, &TcpServerService::OnConnection, Qt::QueuedConnection))
                         {
                             if (tcp_server_pool[i]->CreaterServer(tcp_socket_pool[i]->GetHost(), tcp_socket_pool[i]->GetPort()))
                             {
-                                // ÎªÁË²»Ó°ÏìÖ÷Ïß³ÌÏûÏ¢¶ÓÁĞ£¬Æô¶¯ĞÂµÄÏß³ÌÖ´ĞĞ OnConnection£¬´ËÍâËùÓĞ¶¯×÷½«»áÒÔÒì²½µÄ·½Ê½Í¶µİµ½Ö÷Ïß³ÌÖĞ¡£ 
+                                // ä¸ºäº†ä¸å½±å“ä¸»çº¿ç¨‹æ¶ˆæ¯é˜Ÿåˆ—ï¼Œå¯åŠ¨æ–°çš„çº¿ç¨‹æ‰§è¡Œ OnConnectionï¼Œæ­¤å¤–æ‰€æœ‰åŠ¨ä½œå°†ä¼šä»¥å¼‚æ­¥çš„æ–¹å¼æŠ•é€’åˆ°ä¸»çº¿ç¨‹ä¸­ã€‚ 
                                 tcp_server_pool[i]->moveToThread(tcp_server_thread_pool->GetEventThread(i));
                                 {
                                     continue;
@@ -77,7 +77,7 @@ namespace Shata
             {
                 if (tcp_socket_session.emplace(index, std::make_unique<TcpSession>(index, handler)).second)
                 {
-                    // ½«»á»°Í¶µİµ½Ïß³ÌÖĞÔËĞĞ£¬Ä³Ò»¸öÏß³ÌÔİÊ±×èÈû²»Ó°ÏìÆäËüÏß³ÌÏûÏ¢Ö´ĞĞË³Ğò£¨Í¶µİÊÇ¾ùºâ·ÖÅäµÄ£©¡£
+                    // å°†ä¼šè¯æŠ•é€’åˆ°çº¿ç¨‹ä¸­è¿è¡Œï¼ŒæŸä¸€ä¸ªçº¿ç¨‹æš‚æ—¶é˜»å¡ä¸å½±å“å…¶å®ƒçº¿ç¨‹æ¶ˆæ¯æ‰§è¡Œé¡ºåºï¼ˆæŠ•é€’æ˜¯å‡è¡¡åˆ†é…çš„ï¼‰ã€‚
                     InitializeSession(GetSession(index), tcp_session_thread_pool->GetEventThread(index));
                 }
             }
@@ -107,7 +107,7 @@ namespace Shata
             {
                 if (connect(session, &TcpSession::SendDisconsNotify, this, &TcpServerService::OnDisconnect, Qt::QueuedConnection))
                 {
-                    // ½«»á»°ÈÎÎñËÍµ½Ïß³ÌÖĞÔËĞĞ
+                    // å°†ä¼šè¯ä»»åŠ¡é€åˆ°çº¿ç¨‹ä¸­è¿è¡Œ
                     session->moveToThread(thread);
                 }
             }
@@ -129,7 +129,7 @@ namespace Shata
 
         void TcpServerService::OnConnection(qintptr handler)
         {
-            // ²»ÓÃËø£¬ÒòÎªĞÅºÅÍ¶µİµ½Ö÷Ïß³Ì£¬»áÅÅ¶ÓÒÀ´ÎÖ´ĞĞ¡£Õâ¸öº¯ÊıÊÇÒ»¸ö²Û¡£
+            // ä¸ç”¨é”ï¼Œå› ä¸ºä¿¡å·æŠ•é€’åˆ°ä¸»çº¿ç¨‹ï¼Œä¼šæ’é˜Ÿä¾æ¬¡æ‰§è¡Œã€‚è¿™ä¸ªå‡½æ•°æ˜¯ä¸€ä¸ªæ§½ã€‚
             AddSession(GetPlexingIndex(), handler);
         }
 

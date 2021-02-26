@@ -197,6 +197,10 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="source\socket\include\tcp_session.h" />
+    <ClInclude Include="source\socket\include\event_arch.h" />
+    <ClInclude Include="source\socket\include\event_config.h" />
+    <ClInclude Include="source\socket\include\event_platform.h" />
+    <ClInclude Include="source\socket\include\event_stdint.h" />
     <ClInclude Include="source\socket\include\tcp_socket.h" />
     <ClInclude Include="source\socket\include\tcp_untlity.h" />
     <QtMoc Include="source\socket\include\tcp_thread.h" />

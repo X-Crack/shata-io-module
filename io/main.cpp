@@ -1,4 +1,4 @@
-#include <QtCore/QCoreApplication>
+ï»¿#include <QtCore/QCoreApplication>
 #include <windows.h>
 #include <tcp_server_service.h>
 #include <tcp_server.h>
@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     using namespace Shata::Socket;
     QCoreApplication a(argc, argv);
-    printf("Ö÷Ïß³Ì£º%d\n", GetCurrentThreadId());
+    printf("ä¸»çº¿ç¨‹ï¼š%d\n", GetCurrentThreadId());
     TcpServerService server;
     server.AddListenPort(0, QHostAddress("0.0.0.0"), 8888);
     server.AddListenPort(1, QHostAddress("::"), 8888);

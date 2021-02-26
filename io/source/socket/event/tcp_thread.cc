@@ -1,4 +1,4 @@
-#include <tcp_thread.h>
+ï»¿#include <tcp_thread.h>
 
 namespace Shata
 {
@@ -17,7 +17,7 @@ namespace Shata
 
         void TcpThread::run()
         {
-            // ×èÈûÄ£Ê½ÔËĞĞÏûÏ¢Ñ­»·£¬·ÀÖ¹Ïß³Ì×ÔÎÒÏú»Ù£¨Íâ²¿µ÷ÓÃ quit wait °²È«½áÊøÏß³Ì£©¡£
+            // é˜»å¡æ¨¡å¼è¿è¡Œæ¶ˆæ¯å¾ªç¯ï¼Œé˜²æ­¢çº¿ç¨‹è‡ªæˆ‘é”€æ¯ï¼ˆå¤–éƒ¨è°ƒç”¨ quit wait å®‰å…¨ç»“æŸçº¿ç¨‹ï¼‰ã€‚
             exec();
         }
     }
