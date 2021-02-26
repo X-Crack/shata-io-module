@@ -16,17 +16,6 @@
 #include <unordered_map>
 #include <memory>
 #include <atomic>
-/*!
- *
- * file: tcp_untlity.h
- *
- * author: JoYous(master@crack.ee)
- *
- * reviser: 
- *
- * date: 2021/02/25
- *
- */
 namespace Shata
 {
     namespace Socket
