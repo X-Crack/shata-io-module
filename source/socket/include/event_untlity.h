@@ -21,7 +21,7 @@ namespace Shata
     namespace Socket
     {
         class TcpSession;
-
+        
         typedef std::function<bool(const std::shared_ptr<TcpSession>&, const u96)>                                          InterfaceConnection;
         typedef std::function<bool(const std::shared_ptr<TcpSession>&, const u96)>                                          InterfaceDisconnect;
         typedef std::function<bool(const std::shared_ptr<TcpSession>&, QIODevice*, const u96)>                              InterfaceMessage;

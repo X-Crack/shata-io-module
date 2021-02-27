@@ -41,7 +41,7 @@ namespace Shata
         {
             if (QAbstractSocket::isValid())
             {
-                return strlen(data) == QAbstractSocket::write(data);
+                return static_cast<i64>(strlen(data)) == QAbstractSocket::write(data);
             }
             return false;
         }
@@ -50,7 +50,7 @@ namespace Shata
         {
             if (QAbstractSocket::isValid())
             {
-                return data.size() == QAbstractSocket::write(data.c_str(), data.size());
+                return static_cast<i64>(data.size()) == QAbstractSocket::write(data.c_str(), data.size());
             }
             return false;
         }

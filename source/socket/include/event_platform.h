@@ -47,7 +47,7 @@
 #define USE_PARAMETER(P) (P)
 
 #ifdef H_OS_WINDOWS
-#   pragma warning( disable: 4100 4996 )
+#   pragma warning( disable: 4100 4477 4996 )
 #endif
 
 #endif // __EVENT_PLATFORM_H__

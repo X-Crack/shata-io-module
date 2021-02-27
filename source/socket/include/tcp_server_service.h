@@ -53,7 +53,7 @@ namespace Shata
             void CreaterSession(TcpSession* session, TcpThread* thread, const u96 index);
             bool DestroySession(TcpSession* session);
         private:
-            const quint32 GetPlexingIndex(u96 index = 0);
+            const u96 GetPlexingIndex(u96 index = 0);
         private slots:
             void OnConnection(qintptr handler);
             void OnDisconnect(const std::shared_ptr<TcpSession>& session, const u96 index);
@@ -66,7 +66,7 @@ namespace Shata
             std::unique_ptr<TcpThreadPool>                                          tcp_server_thread_pool;
             std::unique_ptr<TcpThreadPool>                                          tcp_session_thread_pool;
             std::unordered_map<u96, std::shared_ptr<TcpSession>>                    tcp_socket_session;
-            std::priority_queue<u96, std::deque<quint32>, std::greater<quint32>>    tcp_index_multiplexing;
+            std::priority_queue<u96, std::deque<u96>, std::greater<u96>>            tcp_index_multiplexing;
             std::atomic<u96>                                                        tcp_index;
             InterfaceConnection                                                     tcp_connection_callback;
             InterfaceDisconnect                                                     tcp_disconnect_callback;
