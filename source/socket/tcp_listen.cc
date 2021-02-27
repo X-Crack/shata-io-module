@@ -18,6 +18,10 @@ namespace Shata
 
         bool TcpListen::CreaterListen(const QHostAddress& address, u16 port)
         {
+            if (tcp_server->isListening())
+            {
+                return true;
+            }
             return tcp_server->listen(address, port);
         }
 

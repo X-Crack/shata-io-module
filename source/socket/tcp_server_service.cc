@@ -128,6 +128,14 @@ namespace Shata
             }
         }
 
+        void TcpServerService::SetSendReceiptCallback(const InterfaceSendReceipt& callback)
+        {
+            if (nullptr == tcp_sendreceipt_callback)
+            {
+                tcp_sendreceipt_callback = callback;
+            }
+        }
+
         void TcpServerService::SetDisplayErrorCallback(const InterfaceDisplayError& callback)
         {
             if (nullptr == tcp_error_callback)
@@ -172,12 +180,10 @@ namespace Shata
         {
             if (nullptr != session)
             {
-                if 
-                    (
-                       connect(session, &TcpSession::SendDisconsNotify,         this, &TcpServerService::OnDisconnect, Qt::QueuedConnection)
+                if (   connect(session, &TcpSession::SendDisconsNotify,         this, &TcpServerService::OnDisconnect, Qt::QueuedConnection)
                     && connect(session, &TcpSession::SendMessageNotify,         this, &TcpServerService::OnMessage, Qt::DirectConnection)
-                    && connect(session, &TcpSession::SendDisplayErrorNotify,    this, &TcpServerService::OnDisplayError, Qt::QueuedConnection)
-                    )
+                    && connect(session, &TcpSession::SendReceiptNotify,         this, &TcpServerService::OnSendReceipt, Qt::DirectConnection)
+                    && connect(session, &TcpSession::SendDisplayErrorNotify,    this, &TcpServerService::OnDisplayError, Qt::QueuedConnection))
                 {
                     // 将会话任务送到线程中运行
                     return session->moveToThread(thread);
@@ -192,6 +198,7 @@ namespace Shata
                 return
                    disconnect(session, &TcpSession::SendDisconsNotify,          this, &TcpServerService::OnDisconnect)
                 && disconnect(session, &TcpSession::SendMessageNotify,          this, &TcpServerService::OnMessage)
+                && disconnect(session, &TcpSession::SendReceiptNotify,          this, &TcpServerService::OnSendReceipt)
                 && disconnect(session, &TcpSession::SendDisplayErrorNotify,     this, &TcpServerService::OnDisplayError);
             }
             return false;
@@ -235,6 +242,14 @@ namespace Shata
             if (nullptr != tcp_message_callback)
             {
                 tcp_message_callback(session, buffer, index);
+            }
+        }
+
+        void TcpServerService::OnSendReceipt(const std::shared_ptr<TcpSession>& session, const i64 bytes, const u96 index)
+        {
+            if (nullptr != tcp_sendreceipt_callback)
+            {
+                tcp_sendreceipt_callback(session, bytes, index);
             }
         }
 

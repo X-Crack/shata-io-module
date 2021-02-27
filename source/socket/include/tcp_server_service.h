@@ -44,6 +44,7 @@ namespace Shata
             void SetConnectionCallback(const InterfaceConnection& callback);
             void SetDisconnectCallback(const InterfaceDisconnect& callback);
             void SetMessageCallback(const InterfaceMessage& callback);
+            void SetSendReceiptCallback(const InterfaceSendReceipt& callback);
             void SetDisplayErrorCallback(const InterfaceDisplayError& callback);
         private:
             void AddSession(const u96 index, qintptr handler);
@@ -57,6 +58,7 @@ namespace Shata
             void OnConnection(qintptr handler);
             void OnDisconnect(const std::shared_ptr<TcpSession>& session, const u96 index);
             void OnMessage(const std::shared_ptr<TcpSession>& session, QIODevice* buffer, const u96 index);
+            void OnSendReceipt(const std::shared_ptr<TcpSession>& session, const i64 bytes, const u96 index);
             void OnDisplayError(const std::shared_ptr<TcpSession>& session, QAbstractSocket::SocketError error, const u96 index);
         private:
             std::unordered_map<u96, std::unique_ptr<TcpServer>>                     tcp_server_pool;
@@ -69,6 +71,7 @@ namespace Shata
             InterfaceConnection                                                     tcp_connection_callback;
             InterfaceDisconnect                                                     tcp_disconnect_callback;
             InterfaceMessage                                                        tcp_message_callback;
+            InterfaceSendReceipt                                                    tcp_sendreceipt_callback;
             InterfaceDisplayError                                                   tcp_error_callback;
         };
     }

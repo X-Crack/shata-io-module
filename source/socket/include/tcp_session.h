@@ -26,7 +26,7 @@ namespace Shata
             virtual ~TcpSession();
         public slots:
             // 使用槽来定义 Send 未来可能会用到不同线程调用，方便绑定。
-            bool Send(const char* data, qint64 len);
+            bool Send(const char* data, const i64 len);
             bool Send(const char* data);
             bool Send(const std::string& data);
             bool Send(const QByteArray& data);
@@ -35,6 +35,7 @@ namespace Shata
             // 客户断开通知信号
             void SendDisconsNotify(const std::shared_ptr<TcpSession>& session, const u96 index);
             void SendMessageNotify(const std::shared_ptr<TcpSession>& session, QIODevice* buffer, const u96 index);
+            void SendReceiptNotify(const std::shared_ptr<TcpSession>& session, const i64 bytes, const u96 index);
             void SendDisplayErrorNotify(const std::shared_ptr<TcpSession>& session, QAbstractSocket::SocketError error, const u96 index);
             void SendCloseNotify();
         private slots:
